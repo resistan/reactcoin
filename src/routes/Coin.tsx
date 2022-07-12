@@ -32,11 +32,6 @@ const Loader = styled.div`
   text-align: center;
   font-size: 30px;
 `;
-const Footer = styled.footer`
-  padding: 20px;
-  text-align: center;
-`;
-
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;

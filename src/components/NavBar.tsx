@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isDarkAtom } from "../atoms";
-import { useState } from "react";
 
 const SubNav = styled.nav`
   position: fixed;
@@ -36,8 +35,6 @@ const SubNav = styled.nav`
 
 const NavBar = () => {
   const [theme, setTheme] = useRecoilState(isDarkAtom);
-  const [menu, setMenu] = useState(false);
-  const toggleMenu = () => setMenu((prev) => !prev);
   const toggleTheme = () => setTheme((prev) => !prev);
   return (
     <>
