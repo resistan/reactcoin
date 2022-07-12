@@ -20,7 +20,8 @@
   },
   "scripts": {
     "start": "export PORT=3001 && react-scripts start",
-    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -50,6 +51,8 @@
     "@types/react-helmet": "^6.1.5",
     "@types/react-query": "^1.2.9",
     "@types/recoil": "^0.0.9",
-    "@types/styled-components": "^5.1.25"
-  }
+    "@types/styled-components": "^5.1.25",
+    "gh-pages": "^4.0.0"
+  },
+  "homepage": "https://resistan.com/reactcoin/"
 }
