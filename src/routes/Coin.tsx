@@ -97,7 +97,7 @@ function Coin() {
     () => fetchCoinInfo(coinId!)
   );
   if (infoData) {
-    console.log(infoData);
+    // console.log(infoData);
     setCoinName(infoData.name);
   }
   const { isLoading: tickerLoading, data: tickerData } = useQuery<IPriceData>(
