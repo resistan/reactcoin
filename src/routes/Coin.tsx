@@ -12,7 +12,6 @@ import { fetchCoinInfo, fetchCoinTicker } from "../api";
 import { Helmet } from "react-helmet";
 import { coinNameAtom } from "../atoms";
 import { useRecoilState } from "recoil";
-import { useEffect } from "react";
 
 const Container = styled.div`
   max-width: 640px;
@@ -97,12 +96,10 @@ function Coin() {
     ["info", coinId],
     () => fetchCoinInfo(coinId!)
   );
-  useEffect(() => {
-    if (infoData) {
-      console.log(infoData);
-      setCoinName(infoData.name);
-    }
-  }, [infoLoading]);
+  if (infoData) {
+    console.log(infoData);
+    setCoinName(infoData.name);
+  }
   const { isLoading: tickerLoading, data: tickerData } = useQuery<IPriceData>(
     ["tickers", coinId],
     () => fetchCoinTicker(coinId!),
