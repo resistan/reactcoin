@@ -19,3 +19,8 @@ export const isDarkAtom = atom({
   default: false,
   effects: [localStorageEffect("isDark")],
 });
+
+export const coinNameAtom = atom({
+  key: "coinName",
+  default: "",
+});

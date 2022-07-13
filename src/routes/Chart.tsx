@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { fetchCoinHistoty } from "../api";
 import ReactApexChart from "react-apexcharts";
 import { useRecoilValue } from "recoil";
-import { isDarkAtom } from "../atoms";
+import { coinNameAtom, isDarkAtom } from "../atoms";
 import { IChartProps, IHistoryData } from "../interfaces/chart";
 
 const Chart = () => {
@@ -12,6 +12,7 @@ const Chart = () => {
   const { isLoading, data } = useQuery<IHistoryData[]>(["ohlcv", coinId], () =>
     fetchCoinHistoty(coinId)
   );
+  // console.log(data);
 
   return (
     <>
@@ -68,5 +69,5 @@ const Chart = () => {
       )}
     </>
   );
-};
+};;;
 export default Chart;

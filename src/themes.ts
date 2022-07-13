@@ -84,4 +84,10 @@ a {
   text-decoration: none;
   color: inherit;
 }
+.up {
+  color:red;
+}
+.down {
+  color:blue;
+}
 `;

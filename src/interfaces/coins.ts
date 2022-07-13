@@ -111,3 +111,6 @@ export interface Usd {
   ath_date: Date;
   percent_from_price_ath: number;
 }
+export interface IPriceProps {
+  coinId: string | undefined;
+}

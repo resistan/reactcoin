@@ -10,6 +10,9 @@ import { IInfoData, IPriceData } from "../interfaces/coins";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTicker } from "../api";
 import { Helmet } from "react-helmet";
+import { coinNameAtom } from "../atoms";
+import { useRecoilState } from "recoil";
+import { useEffect } from "react";
 
 const Container = styled.div`
   max-width: 640px;
@@ -52,21 +55,23 @@ const OverviewItem = styled.div`
 `;
 const Description = styled.p`
   margin: 20px 0px;
+  padding: 0 10px;
 `;
 const Tabs = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 40px 0 20px;
-  padding-top: 10px;
   background-color: ${(props) => props.theme.bgColor};
+  border-radius: 10px;
+  overflow: hidden;
 `;
 const Tab = styled.span<{ isActive: boolean }>`
   display: block;
-  width: 40%;
+  width: 50%;
   color: ${(props) => props.theme.bgColor};
   background-color: ${(props) =>
     props.isActive ? props.theme.textColor : props.theme.accentColor};
-  border-radius: 10px;
+  opacity: ${(props) => (props.isActive ? 0.55 : 1)};
   a {
     display: block;
     padding: 10px;
@@ -82,6 +87,7 @@ interface IRouterState {
 }
 
 function Coin() {
+  const [coinName, setCoinName] = useRecoilState(coinNameAtom);
   const { coinId } = useParams();
   const { state } = useLocation() as IRouterState;
   const priceMatch = useMatch("/:coinId/price");
@@ -91,6 +97,9 @@ function Coin() {
     ["info", coinId],
     () => fetchCoinInfo(coinId!)
   );
+  useEffect(() => {
+    if (infoData) setCoinName(infoData.name);
+  }, [infoData]);
   const { isLoading: tickerLoading, data: tickerData } = useQuery<IPriceData>(
     ["tickers", coinId],
     () => fetchCoinTicker(coinId!),
@@ -100,7 +109,7 @@ function Coin() {
   return (
     <Container>
       <Helmet>
-        <title>{state?.name}</title>
+        <title>{coinName}</title>
       </Helmet>
       <Header>
         <Title>
@@ -118,11 +127,11 @@ function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Symbol:</span>
-              <span>${infoData?.symbol}</span>
+              <span>{infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
               <span>Price:</span>
-              <span>{tickerData?.quotes.USD.price}</span>
+              <span>${tickerData?.quotes.USD.price}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
