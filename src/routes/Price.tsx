@@ -3,8 +3,6 @@ import { useQuery } from "react-query";
 import { fetchCoinTicker } from "../api";
 import { IPriceProps } from "../interfaces/coins";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
-import { coinNameAtom } from "../atoms";
 
 const PriceList = styled.ul`
   margin: 1em 0;
