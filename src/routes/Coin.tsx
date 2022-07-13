@@ -98,8 +98,11 @@ function Coin() {
     () => fetchCoinInfo(coinId!)
   );
   useEffect(() => {
-    if (infoData) setCoinName(infoData.name);
-  }, [infoData]);
+    if (infoData) {
+      console.log(infoData);
+      setCoinName(infoData.name);
+    }
+  }, [infoLoading]);
   const { isLoading: tickerLoading, data: tickerData } = useQuery<IPriceData>(
     ["tickers", coinId],
     () => fetchCoinTicker(coinId!),
@@ -109,7 +112,7 @@ function Coin() {
   return (
     <Container>
       <Helmet>
-        <title>{coinName}</title>
+        <title>{coinName && coinName}</title>
       </Helmet>
       <Header>
         <Title>
